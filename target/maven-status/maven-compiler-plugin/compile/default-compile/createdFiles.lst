@@ -1,0 +1,5 @@
+com\example\RaspberryDataServer\entities\DataStorage.class
+com\example\RaspberryDataServer\RaspberryDataServerApplication.class
+com\example\RaspberryDataServer\services\DataStorageService.class
+com\example\RaspberryDataServer\controllers\DataStorageController.class
+com\example\RaspberryDataServer\repositories\DataStorageRepo.class

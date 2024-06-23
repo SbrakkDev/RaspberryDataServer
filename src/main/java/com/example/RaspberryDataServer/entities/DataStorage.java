@@ -1,5 +1,6 @@
 package com.example.RaspberryDataServer.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
 import java.util.Date;
@@ -12,15 +13,29 @@ public class DataStorage {
     private Long id;
     private String name;
     private String format;
+    private String path;
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     private Date date;
+    @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
+    private Date dateLatestChange;
 
-    public DataStorage(String name, String format, Date date) {
+    public DataStorage(String name, String format, String path, Date date, Date dateLatestChange) {
         this.name = name;
         this.format = format;
+        this.path = path;
         this.date = date;
+        this.dateLatestChange = dateLatestChange;
     }
 
     public DataStorage() {
+    }
+
+    public Date getDateLatestChange() {
+        return dateLatestChange;
+    }
+
+    public void setDateLatestChange(Date dateLatestChange) {
+        this.dateLatestChange = dateLatestChange;
     }
 
     public Long getId() {
