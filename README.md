@@ -32,6 +32,8 @@ Status: In Progress <img src="https://github.com/SbrakkDev/iconeReadme/blob/main
 - Files entity ✔
 - service to Upload a file ✔
 - service to Download a file ✔
+- duplicate file management ✔
+- delete from db and raspberry ✔
 - FilesEvent entity
 - service to create a directory
 - service to rename a file
