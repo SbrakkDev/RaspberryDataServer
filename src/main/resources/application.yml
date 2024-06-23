@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/dataStoragePi
+    username : root
+    # put your root user password
+    password :
+
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+
+  servlet:
+    multipart:
+      max-file-size: -1
+      max-request-size: -1
+
+# Change Raspberry_name with the name of your personal raspberry
+fileRepoFolder: /home/"raspberry_name"/Desktop/Storage/
