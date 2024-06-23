@@ -1,7 +1,7 @@
 # RaspberryDataServer
 A simple Spring boot data storage server made with Raspberry that you can use with all the device in the same network!
 
-Status: In Progress.
+Status: In Progress <img src="https://github.com/SbrakkDev/iconeReadme/blob/main/In_progress.png" alt = "In Progress" width="10" height="10">
 
 ## Requirements
 
