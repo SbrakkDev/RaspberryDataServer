@@ -18,3 +18,4 @@ spring:
 # Change Raspberry_name with the name of your personal raspberry
 #fileRepoFolder: /home/"raspberry_name"/Desktop/Storage/
 fileRepoFolder: /home/raspdavide/Desktop/Storage/
+#fileRepoFolder:  C:\Users\busad\Desktop\Nuova cartella
