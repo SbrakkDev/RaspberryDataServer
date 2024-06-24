@@ -1,5 +1,6 @@
 package com.example.RaspberryDataServer.controllers;
 
+import com.example.RaspberryDataServer.dto.DataStorageDto;
 import com.example.RaspberryDataServer.entities.DataStorage;
 import com.example.RaspberryDataServer.services.DataStorageService;
 import jakarta.servlet.http.HttpServletResponse;
@@ -49,7 +50,7 @@ public class DataStorageController {
         return dataStorageService.download(file);
     }
     @GetMapping("/files")
-    public List<DataStorage> getAllFiles(){
+    public List<DataStorageDto> getAllFiles(){
         return dataStorageService.getAllFiles();
     }
 

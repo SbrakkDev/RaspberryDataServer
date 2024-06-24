@@ -9,15 +9,18 @@ import java.util.Date;
 @Table
 public class DataStorage {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private String format;
     private String path;
+
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     private Date date;
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     private Date dateLatestChange;
+    private boolean deleted;
+
 
     public DataStorage(String name, String format, String path, Date date, Date dateLatestChange) {
         this.name = name;
@@ -25,9 +28,26 @@ public class DataStorage {
         this.path = path;
         this.date = date;
         this.dateLatestChange = dateLatestChange;
+        this.deleted = false;
     }
 
     public DataStorage() {
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
     }
 
     public Date getDateLatestChange() {
