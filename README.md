@@ -34,8 +34,8 @@ Status: In Progress <img src="https://github.com/SbrakkDev/iconeReadme/blob/main
 - service to Download a file ✔
 - duplicate file management ✔
 - delete from db and raspberry ✔
-- FilesEvent entity
+- FilesEvent entity ✔
 - service to create a directory
-- service to rename a file
-- service to delete a file
+- service to rename a file ✔
+- service to delete a file ✔
 - service to search files by various variables
