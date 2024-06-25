@@ -18,19 +18,22 @@ public class FileEvent {
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     private Date eventDate;
     private FileEventEnum eventType;
+    private String eventDescription;
 
     public FileEvent(StoredFile file, String ip, Date eventDate) {
         this.file = file;
         this.ip = ip;
         this.eventDate = eventDate;
         this.eventType = FileEventEnum.CREATION;
+        this.eventDescription = "File Created";
     }
 
-    public FileEvent(StoredFile file, String ip, Date eventDate, FileEventEnum eventType) {
+    public FileEvent(StoredFile file, String ip, Date eventDate, FileEventEnum eventType, String eventDescription) {
         this.file = file;
         this.ip = ip;
         this.eventDate = eventDate;
         this.eventType = eventType;
+        this.eventDescription = eventDescription;
     }
 
     public FileEvent() {
@@ -74,5 +77,13 @@ public class FileEvent {
 
     public void setEventType(FileEventEnum eventType) {
         this.eventType = eventType;
+    }
+
+    public String getEventDescription() {
+        return eventDescription;
+    }
+
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
     }
 }

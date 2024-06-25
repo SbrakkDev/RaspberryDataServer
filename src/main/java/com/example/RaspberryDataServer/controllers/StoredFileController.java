@@ -1,6 +1,8 @@
 package com.example.RaspberryDataServer.controllers;
 
+import com.example.RaspberryDataServer.dto.FileEventDto;
 import com.example.RaspberryDataServer.dto.StoredFileDto;
+import com.example.RaspberryDataServer.entities.FileEvent;
 import com.example.RaspberryDataServer.services.StoredFileService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -18,6 +20,7 @@ import java.util.List;
 public class StoredFileController {
     @Autowired
     private StoredFileService storedFileService;
+
 
     @PostMapping("/upload")
     public String upload(@RequestParam MultipartFile file, HttpServletRequest request) throws IOException {
@@ -61,6 +64,10 @@ public class StoredFileController {
     @DeleteMapping()
     public String deleteFile(@RequestParam String fileName,HttpServletRequest request ){
         return storedFileService.deleteFile(fileName,request);
+    }
+    @PatchMapping("/edit")
+    public String editName(@RequestParam String fileName,@RequestParam String ext, @RequestParam String newName, HttpServletRequest request) throws IOException {
+        return storedFileService.edit(fileName,ext,newName,request);
     }
     @DeleteMapping("/clean")
     public String deleteAll(){

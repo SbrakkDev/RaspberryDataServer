@@ -11,14 +11,16 @@ public class FileEventDto {
     private String ip;
     @JsonFormat(pattern="dd-MM-yyyy HH:mm:ss")
     private Date eventDate;
-    private FileEventEnum eventTYpe;
+    private FileEventEnum eventType;
+    private String eventDescription;
 
-    public FileEventDto(Long id, String file_name, String ip, Date eventDate, FileEventEnum eventTYpe) {
+    public FileEventDto(Long id, String file_name, String ip, Date eventDate, FileEventEnum eventType,String eventDescription) {
         this.id = id;
         this.file_name = file_name;
         this.ip = ip;
         this.eventDate = eventDate;
-        this.eventTYpe = eventTYpe;
+        this.eventType = eventType;
+        this.eventDescription = eventDescription;
     }
 
     public FileEventDto() {
@@ -56,11 +58,19 @@ public class FileEventDto {
         this.eventDate = eventDate;
     }
 
-    public FileEventEnum getEventTYpe() {
-        return eventTYpe;
+    public FileEventEnum getEventType() {
+        return eventType;
     }
 
-    public void setEventTYpe(FileEventEnum eventTYpe) {
-        this.eventTYpe = eventTYpe;
+    public void setEventType(FileEventEnum eventType) {
+        this.eventType = eventType;
+    }
+
+    public String getEventDescription() {
+        return eventDescription;
+    }
+
+    public void setEventDescription(String eventDescription) {
+        this.eventDescription = eventDescription;
     }
 }

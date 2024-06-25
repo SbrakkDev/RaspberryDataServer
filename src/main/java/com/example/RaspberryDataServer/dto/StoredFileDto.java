@@ -75,7 +75,7 @@ public class StoredFileDto {
         this.dateLatestChange = dateLatestChange;
     }
 
-    public boolean isDeleted() {
+    public boolean getDeleted() {
         return deleted;
     }
 

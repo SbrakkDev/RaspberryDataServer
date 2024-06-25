@@ -3,8 +3,7 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/dataStoragePi
     username : root
     # put your root user password
-    password : davide25
-
+    password :
   jpa:
     show-sql: true
     hibernate:
@@ -17,5 +16,5 @@ spring:
 
 # Change Raspberry_name with the name of your personal raspberry
 #fileRepoFolder: /home/"raspberry_name"/Desktop/Storage/
-fileRepoFolder: /home/raspdavide/Desktop/Storage/
-#fileRepoFolder:  C:\Users\busad\Desktop\Nuova cartella
+#fileRepoFolder: /home/raspdavide/Desktop/Storage/
+fileRepoFolder:  C:\Users\busad\Desktop\Nuova cartella

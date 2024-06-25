@@ -15,7 +15,7 @@ public class StoredFileMapper {
                 ent.getPath(),
                 ent.getDate(),
                 ent.getDateLatestChange(),
-                ent.isDeleted()
+                ent.getDeleted()
         );
     }
 
