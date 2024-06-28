@@ -1,7 +1,7 @@
 package com.example.RaspberryDataServer.mappers;
 
-import com.example.RaspberryDataServer.dto.StoredFileDto;
-import com.example.RaspberryDataServer.entities.StoredFile;
+import com.example.RaspberryDataServer.models.dto.StoredFileDto;
+import com.example.RaspberryDataServer.models.entities.StoredFile;
 import org.springframework.stereotype.Component;
 
 @Component

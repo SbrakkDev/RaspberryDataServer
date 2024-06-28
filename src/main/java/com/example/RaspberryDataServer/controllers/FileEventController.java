@@ -1,7 +1,7 @@
 package com.example.RaspberryDataServer.controllers;
 
-import com.example.RaspberryDataServer.dto.FileEventDto;
-import com.example.RaspberryDataServer.enums.FileEventEnum;
+import com.example.RaspberryDataServer.models.dto.FileEventDto;
+import com.example.RaspberryDataServer.utility.enums.FileEventEnum;
 import com.example.RaspberryDataServer.services.FileEventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -31,13 +31,13 @@ public class FileEventController {
     }
 
     @GetMapping("/day")
-    public List<FileEventDto> getAllEventByDay(@RequestParam String day){
-        return fileEventService.findAllEventByDay(day);
+    public List<FileEventDto> getAllEventByDay(@RequestParam String day,@RequestParam String month,@RequestParam String year){
+        return fileEventService.findAllEventByDay(day,month,year);
     }
 
     @GetMapping("/month")
-    public List<FileEventDto> getAllEventByMonth(@RequestParam String month){
-        return fileEventService.findAllEventByMonth(month);
+    public List<FileEventDto> getAllEventByMonth(@RequestParam String month,@RequestParam String year){
+        return fileEventService.findAllEventByMonth(month,year);
     }
 
     @GetMapping("/year")

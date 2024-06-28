@@ -1,9 +1,8 @@
 package com.example.RaspberryDataServer.services;
 
-import com.example.RaspberryDataServer.dto.FileEventDto;
-import com.example.RaspberryDataServer.entities.FileEvent;
-import com.example.RaspberryDataServer.entities.StoredFile;
-import com.example.RaspberryDataServer.enums.FileEventEnum;
+import com.example.RaspberryDataServer.models.dto.FileEventDto;
+import com.example.RaspberryDataServer.models.entities.FileEvent;
+import com.example.RaspberryDataServer.utility.enums.FileEventEnum;
 import com.example.RaspberryDataServer.mappers.FileEventMapper;
 import com.example.RaspberryDataServer.repositories.FileEventRepo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,35 +54,37 @@ public class FileEventService {
         return fileEventDtos;
     }
 
-    public List<FileEventDto> findAllEventByDay(String day){
+    public List<FileEventDto> findAllEventByDay(String day,String month,String year){
         List<FileEvent> fileEvents = fileEventRepo.findAll();
         List<FileEventDto> fileEventDtos = new ArrayList<>();
         for(FileEvent fileEvent : fileEvents){
-            if(checkDay(fileEvent.getEventDate().toString(),day)){
+            if(checkDay(fileEvent.getEventDate().toString(),day, month,year)){
                 fileEventDtos.add(map.entityToDto(fileEvent));
             }
         }
         return fileEventDtos;
     }
-    private boolean checkDay(String day, String dayToCheck){
-        if(day.substring(8,10).equals(dayToCheck)){
+    private boolean checkDay(String date, String day, String month,String year){
+        String dateToCheck = year+"-"+month+"-"+day;
+        if(date.substring(0,10).equals(dateToCheck)){
             return true;
         }else {
             return false;
         }
     }
-    public List<FileEventDto> findAllEventByMonth(String month){
+    public List<FileEventDto> findAllEventByMonth(String month,String year){
         List<FileEvent> fileEvents = fileEventRepo.findAll();
         List<FileEventDto> fileEventDtos = new ArrayList<>();
         for(FileEvent fileEvent : fileEvents){
-            if(checkMonth(fileEvent.getEventDate().toString(),month)){
+            if(checkMonth(fileEvent.getEventDate().toString(),month,year)){
                 fileEventDtos.add(map.entityToDto(fileEvent));
             }
         }
         return fileEventDtos;
     }
-    private boolean checkMonth(String month, String monthToCheck){
-        if(month.substring(5,7).equals(monthToCheck)){
+    private boolean checkMonth(String date, String month, String year){
+        String dateToCheck = year+"-"+month;
+        if(date.substring(0,7).equals(dateToCheck)){
             return true;
         }else {
             return false;

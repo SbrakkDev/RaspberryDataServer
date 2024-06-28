@@ -1,7 +1,7 @@
 package com.example.RaspberryDataServer.mappers;
 
-import com.example.RaspberryDataServer.dto.FileEventDto;
-import com.example.RaspberryDataServer.entities.FileEvent;
+import com.example.RaspberryDataServer.models.dto.FileEventDto;
+import com.example.RaspberryDataServer.models.entities.FileEvent;
 import com.example.RaspberryDataServer.repositories.StoredFileRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -14,8 +14,8 @@ public class FileEventMapper {
 
     public FileEventDto entityToDto(FileEvent ent){
         return new FileEventDto(
-                ent.getId(),
-                ent.getFile().getName(),
+                ent.getFile().getId(),
+                ent.getFileName(),
                 ent.getIp(),
                 ent.getEventDate(),
                 ent.getEventType(),
@@ -24,7 +24,8 @@ public class FileEventMapper {
     }
     public FileEvent dtoToEntity(FileEventDto dto){
         return new FileEvent(
-                storedFileRepo.findFileByName(dto.getFile_name()).get(),
+                storedFileRepo.findById(dto.getFile_id()).get(),
+                dto.getFileName(),
                 dto.getIp(),
                 dto.getEventDate(),
                 dto.getEventType(),

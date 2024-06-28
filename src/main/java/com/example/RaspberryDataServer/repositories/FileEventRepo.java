@@ -1,7 +1,7 @@
 package com.example.RaspberryDataServer.repositories;
 
-import com.example.RaspberryDataServer.entities.FileEvent;
-import com.example.RaspberryDataServer.enums.FileEventEnum;
+import com.example.RaspberryDataServer.models.entities.FileEvent;
+import com.example.RaspberryDataServer.utility.enums.FileEventEnum;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

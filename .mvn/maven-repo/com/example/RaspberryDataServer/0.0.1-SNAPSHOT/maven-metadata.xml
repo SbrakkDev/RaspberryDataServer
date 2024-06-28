@@ -3,21 +3,21 @@
   <groupId>com.example</groupId>
   <artifactId>RaspberryDataServer</artifactId>
   <versioning>
-    <lastUpdated>20240625205829</lastUpdated>
+    <lastUpdated>20240627201100</lastUpdated>
     <snapshot>
-      <timestamp>20240625.205829</timestamp>
-      <buildNumber>40</buildNumber>
+      <timestamp>20240627.201100</timestamp>
+      <buildNumber>41</buildNumber>
     </snapshot>
     <snapshotVersions>
       <snapshotVersion>
         <extension>pom</extension>
-        <value>0.0.1-20240625.205829-40</value>
-        <updated>20240625205829</updated>
+        <value>0.0.1-20240627.201100-41</value>
+        <updated>20240627201100</updated>
       </snapshotVersion>
       <snapshotVersion>
         <extension>jar</extension>
-        <value>0.0.1-20240625.205829-40</value>
-        <updated>20240625205829</updated>
+        <value>0.0.1-20240627.201100-41</value>
+        <updated>20240627201100</updated>
       </snapshotVersion>
     </snapshotVersions>
   </versioning>

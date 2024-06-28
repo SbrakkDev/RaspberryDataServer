@@ -1,9 +1,9 @@
 package com.example.RaspberryDataServer.services;
 
-import com.example.RaspberryDataServer.dto.StoredFileDto;
-import com.example.RaspberryDataServer.entities.FileEvent;
-import com.example.RaspberryDataServer.entities.StoredFile;
-import com.example.RaspberryDataServer.enums.FileEventEnum;
+import com.example.RaspberryDataServer.models.dto.StoredFileDto;
+import com.example.RaspberryDataServer.models.entities.FileEvent;
+import com.example.RaspberryDataServer.models.entities.StoredFile;
+import com.example.RaspberryDataServer.utility.enums.FileEventEnum;
 import com.example.RaspberryDataServer.mappers.StoredFileMapper;
 import com.example.RaspberryDataServer.repositories.FileEventRepo;
 import com.example.RaspberryDataServer.repositories.StoredFileRepo;
@@ -39,7 +39,7 @@ public class StoredFileService {
 
     @Value("${fileRepoFolder}")
     private String fileRepoFolder;
-    public String upload(MultipartFile file, HttpServletRequest request) throws IOException {
+    public FileEvent upload(MultipartFile file, HttpServletRequest request) throws IOException {
         String ext = FilenameUtils.getExtension(file.getOriginalFilename());
         String nome = FilenameUtils.getBaseName(file.getOriginalFilename());
         String newFileName = checkDuplicateFile(nome, ext);
@@ -47,18 +47,10 @@ public class StoredFileService {
         file.transferTo(filePath);
         String ip = request.getRemoteAddr();
         StoredFile newData = new StoredFile(newFileName,ext,fileRepoFolder,new Date(),new Date());
-        FileEvent newEvent = new FileEvent(newData,ip,new Date());
+        FileEvent newEvent = new FileEvent(newData,newFileName+"."+ext,ip,new Date());
         storedFileRepo.save(newData);
         fileEventRepo.save(newEvent);
-        return newFileName;
-    }
-    public String uploadNewJar(MultipartFile file) throws IOException {
-        File finalDest = new File(fileRepoFolder + "/" + file.getOriginalFilename());
-        if(finalDest.exists()){
-            finalDest.delete();
-        }
-        file.transferTo(finalDest);
-        return file.getOriginalFilename();
+        return newEvent;
     }
 
     private String checkDuplicateFile(String fileName, String ext){
@@ -82,14 +74,7 @@ public class StoredFileService {
         return IOUtils.toByteArray(new FileInputStream(fileFromRepo));
     }
 
-    public List<StoredFileDto> getAllFiles() {
-        List<StoredFile> storedFileList = storedFileRepo.findAll();
-        List<StoredFileDto> storedFileDtoList = new ArrayList<>();
-        for(StoredFile storedFile : storedFileList){
-            storedFileDtoList.add(map.entityToDto(storedFile));
-        }
-        return storedFileDtoList;
-    }
+
     public List<StoredFileDto> getAllFilesNotDeleted() {
         List<StoredFile> storedFileList = storedFileRepo.findAllFilesNotDeleted();
         List<StoredFileDto> storedFileDtoList = new ArrayList<>();
@@ -99,21 +84,21 @@ public class StoredFileService {
         return storedFileDtoList;
     }
 
-    public String deleteFile(String fileName,HttpServletRequest request) {
+    public String deleteFile(String fileName,String ext,HttpServletRequest request) {
         String response = "";
         String ip = request.getRemoteAddr();
         Optional<StoredFile> storedFile = storedFileRepo.findFileByName(fileName);
         if (storedFile.isPresent()&&!storedFile.get().getDeleted()) {
             storedFile.get().setDeleted(true);
             storedFile.get().setDateLatestChange(new Date());
-            FileEvent newEvent = new FileEvent(storedFile.get(),ip,new Date(), FileEventEnum.DELETE, "File Deleted");
+            FileEvent newEvent = new FileEvent(storedFile.get(),fileName+"."+ext,ip,new Date(), FileEventEnum.DELETE, "File Deleted");
             storedFileRepo.saveAndFlush(storedFile.get());
             fileEventRepo.save(newEvent);
             response = response + "file eliminated from db";
         }else{
             return "no file was found";
         }
-        File file = new File(fileRepoFolder + "/" + fileName);
+        File file = new File(fileRepoFolder + "/" + fileName + "." + ext);
         if(file.exists()) {
             file.delete();
             response = response + " and from the data storage";
@@ -131,9 +116,11 @@ public class StoredFileService {
         if (storedFile.isPresent()&&!storedFile.get().getDeleted()&&file.exists()) {
             fileEventRepo.save(new FileEvent(
                     storedFile.get(),
+                    fileName+"."+ext,
                     ip,
                     new Date(),
-                    FileEventEnum.EDIT, "File renamed from "+fileName+ "." +ext + " to " + fullName + "." + ext
+                    FileEventEnum.EDIT,
+                    "File renamed from "+fileName+ "." +ext + " to " + fullName + "." + ext
                     )
             );
             storedFile.get().setName(fullName);
@@ -147,9 +134,4 @@ public class StoredFileService {
         }
         return  "File not found";
     }
-
-    public void cleanDb(){
-        fileEventRepo.deleteAll();
-        storedFileRepo.deleteAll();
-   }
 }
